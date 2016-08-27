@@ -3,6 +3,8 @@ window.onload = function () {
         info = document.getElementById('test-file-info'),
         preview = document.getElementById('test-image-preview');
 
+    var imageData;
+
     // Listen on change event
     fileInput.addEventListener('change', function () {
         // clear background picture
@@ -28,11 +30,23 @@ window.onload = function () {
         // read file
         var reader = new FileReader();
         reader.onload = function (e) {
-            var data = e.target.result;
-            preview.style.backgroundImage = 'url(' + data + ')';
+            imageData = e.target.result;
+            preview.style.backgroundImage = 'url(' + imageData + ')';
         };
         // read file as Data url
         reader.readAsDataURL(file);
+    });
+
+    $('form').submit(function (ev) {
+        ev.preventDefault();
+
+        var form = $(this);
+        $.ajax(form.attr('action'), {
+            method: 'POST',
+            data: {"imageData" : imageData}
+        }).done(function (obj) {
+            alert(obj);
+        });
     });
     console.log(fileInput);
 }

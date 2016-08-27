@@ -1,0 +1,7 @@
+{
+  "name": "ajax-xmlrequest",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "latest"
+  }
+}
