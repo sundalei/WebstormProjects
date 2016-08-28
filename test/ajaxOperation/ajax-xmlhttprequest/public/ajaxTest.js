@@ -3,14 +3,30 @@
  */
 
 var checkForm = function() {
-    var request = new XMLHttpRequest();
+
+    function success(text) {
+        var textarea = document.getElementById('test-response-text');
+        textarea.value = text;
+    }
+
+    function fail(code) {
+        var textarea = document.getElementById('test-response-text');
+        textarea.value = 'Error code: ' + code;
+    }
+
+    var request;
+    if (window.XMLHttpRequest) {
+        request = new XMLHttpRequest();
+    } else {
+        request = new ActiveXObject('Microsoft.XMLHTTP');
+    }
 
     request.onreadystatechange = function () {
         if(request.readyState === 4) {
             if(request.status === 200) {
-                console.log('success');
+                return success(request.responseText);
             } else {
-                console.log('fail');
+                return fail(request.status);
             }
         } else {
             console.log('HTTP request is continuing');

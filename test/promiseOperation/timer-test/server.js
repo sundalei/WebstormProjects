@@ -1,11 +1,11 @@
-/**
- * Created by sun_d on 2016/8/27.
- */
 var express = require('express');
+
 var app = express();
 
 app.use(express.static(__dirname + '/public'));
-app.use('/jsonp', express.static(__dirname + '/public/ajaxTest2.html'));
+app.use('/timer', express.static(__dirname + '/public/timer-test.html'));
+app.use('/jobSeq', express.static(__dirname + '/public/jobSeq-test.html'));
+app.use('/ajax', express.static(__dirname + '/public/ajax-test.html'));
 
 app.get('/api/categories', function (req, res, next) {
 	var categories = [];
@@ -38,8 +38,6 @@ app.get('/api/categories', function (req, res, next) {
     res.json({'categories' : categories});
 });
 
-
-
-app.listen(3000, function () {
-    console.log('Server is listening on port 3000');
+app.listen(3000, function() {
+	console.log('Server is listening on port 3000');
 });
