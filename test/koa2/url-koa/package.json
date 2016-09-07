@@ -1,0 +1,26 @@
+{
+  "name": "hello-koa2",
+  "version": "1.0.0",
+  "description": "Hello Koa 2 example with async",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "keywords": [
+    "koa",
+    "async"
+  ],
+  "author": "Sun dalei",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sundalei/WebstormProjects.git"
+  },
+  "dependencies": {
+     "babel-register": "latest",
+     "babel-polyfill": "latest",
+     "babel-preset-stage-3": "latest",
+     "koa": "^2.0.0",
+     "koa-router": "^7.0.0"
+  }
+}
