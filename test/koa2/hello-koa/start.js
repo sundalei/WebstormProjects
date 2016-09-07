@@ -1,4 +1,4 @@
-var register = require('babel-core/register');
+var register = require('babel-register');
 
 register({
     presets: ['stage-3']

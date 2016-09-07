@@ -6,25 +6,20 @@
   "scripts": {
     "start": "node start.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sundalei/WebstormProjects.git"
-  },
   "keywords": [
     "koa",
     "async"
   ],
   "author": "Sun dalei",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/sundalei/WebstormProjects/issues"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sundalei/WebstormProjects.git"
   },
-  "homepage": "https://github.com/sundalei/WebstormProjects#readme",
   "dependencies": {
-     "babel-core": "6.13.2",
-     "babel-polyfill": "6.13.0",
-     "babel-preset-es2015-node6": "0.3.0",
-     "babel-preset-stage-3": "6.5.0",
+     "babel-register": "latest",
+     "babel-polyfill": "latest",
+     "babel-preset-stage-3": "latest",
      "koa": "2.0.0"
   }
 }
