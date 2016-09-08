@@ -1,33 +1,15 @@
-const Koa = require('koa');
+'use strict';
 
-const bodyParser = require('koa-bodyparser');
-
-const router = require('koa-router')();
-
-const app = new Koa();
-
-app.use(bodyParser());
-
-app.use(async (ctx, next) => {
-    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
-    await next();
-});
-
-router.get('/hello/:name', async (ctx, next) => {    
-    var name = ctx.params.name;
-    ctx.response.body = `<h1>Hello, ${name}!</h1>`;
-});
-
-router.get('/', async (ctx, next) => {
+var fn_index = async (ctx, next) => {
     ctx.response.body = `<h1>Index</h1>
       <form action="/signin" method="post">
         <p>Name: <input name="name" value="koa"></p>
         <p>Password: <input type="password" name="password"></p>
         <p><input type="submit" value="Submit"></p>
       </form>`;
-});
+};
 
-router.post('/signin', async (ctx, next) => {
+var fn_signin = async (ctx, next) => {
     var
        name = ctx.request.body.name || '',
        password = ctx.request.body.password || '';
@@ -38,10 +20,10 @@ router.post('/signin', async (ctx, next) => {
         ctx.response.body = `<h1>Login failed!</h1>
         <p><a href="/">Try again</a></p>`
     }
-    
-});
+};
 
-app.use(router.routes());
+module.exports = {
+    'GET /': fn_index,
+    'POST /signin': fn_signin
+};
 
-app.listen(3000);
-console.log('app started at port 3000...');
