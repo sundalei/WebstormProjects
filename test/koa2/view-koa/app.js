@@ -1,41 +1,45 @@
+'use strict';
+
 const Koa = require('koa');
 
 const bodyParser = require('koa-bodyparser');
 
-const fs = require('fs');
-
 const router = require('koa-router')();
+
+const templating = require('./templating');
+
+const fs = require('fs');
 
 const app = new Koa();
 
 const isProduction = process.env.NODE_ENV === 'production';
-app.use(templating('view'), {
-    noCache: !isProduction,
-    watch: !isProduction
+
+// log request URL:
+app.use(async (ctx, next) => {
+    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
+    var 
+        start = new Date().getTime(),
+        execTime;
+    await next();
+    execTime = new Date().getTime() - start;
+    ctx.response.set('X-Response-Time', `${execTime}ms`);
 });
 
-if(!isProduction) {
+if (!isProduction) {
     let staticFiles = require('./static-files');
     app.use(staticFiles('/static/', __dirname + '/static'));
 }
 
 app.use(bodyParser());
 
-app.use(async (ctx, next) => {
-    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
-    await next();
-});
+app.use(templating('view', {
+    noCache: !isProduction,
+    watch: !isProduction
+}));
 
-var files = fs.readdirSync(__dirname + '/controllers');
+// add url-route in /controllers:
 
-var js_files = files.filter((f) => {
-    return f.endsWith('.js');
-}, files);
-
-for (var f of js_files) {
-    console.log(`process controller: ${f}...`);
-
-    let mapping = require(__dirname + '/controllers/' + f);
+function addMapping(router, mapping) {
     for (var url in mapping) {
         if (url.startsWith('GET ')) {
             var path = url.substring(4);
@@ -50,6 +54,21 @@ for (var f of js_files) {
         }
     }
 }
+
+function addControllers(router) {
+    var files = fs.readdirSync(__dirname + '/controllers');
+    var js_files = files.filter((f) => {
+        return f.endsWith('.js');
+    }, files);
+
+    for (var f of js_files) {
+        console.log(`process controller: ${f}...`);
+        let mapping = require(__dirname + '/controllers/' + f);
+        addMapping(router, mapping);
+    }
+}
+
+addControllers(router);
 
 app.use(router.routes());
 
