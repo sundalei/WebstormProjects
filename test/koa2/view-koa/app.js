@@ -32,7 +32,7 @@ if (!isProduction) {
 
 app.use(bodyParser());
 
-app.use(templating('view', {
+app.use(templating('views', {
     noCache: !isProduction,
     watch: !isProduction
 }));
