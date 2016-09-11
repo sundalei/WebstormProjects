@@ -1,0 +1,11 @@
+{
+    "name": "hello-sequelize",
+    "version": "1.0.0",
+    "dependencies": {
+        "babel-register": "latest",
+        "babel-polyfill": "latest",
+        "babel-preset-stage-3": "latest",
+        "sequelize": "latest",
+        "mysql": "latest"
+    }
+}
