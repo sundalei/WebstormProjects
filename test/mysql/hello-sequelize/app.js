@@ -30,7 +30,12 @@ var Pet = sequelize.define('pet', {
 
 var now = Date.now();
 
-var p1 = Pet.create({
+/**
+ * Promise style
+ */
+
+/*
+Pet.create({
     id: 'g-' + now,
     name: 'Gaffey',
     gender: false,
@@ -43,3 +48,22 @@ var p1 = Pet.create({
 }).catch(function(err) {
     console.log('failed: ' + err);
 });
+*/
+
+/**
+ * async/await style
+ */
+(async () => {
+    var dog = await Pet.create({
+        id: 'd-' + now,
+        name: 'Odie',
+        gender: false,
+        birth: '2008-08-08',
+        createdAt: now,
+        updatedAt: now,
+        version: 0
+    });
+    console.log('hello world');
+    console.log(dog);
+    console.log('created: ' + JSON.stringify(dog));
+})();

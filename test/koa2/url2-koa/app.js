@@ -15,16 +15,7 @@ app.use(async (ctx, next) => {
     await next();
 });
 
-var files = fs.readdirSync(__dirname + '/controllers');
-
-var js_files = files.filter((f) => {
-    return f.endsWith('.js');
-}, files);
-
-for (var f of js_files) {
-    console.log(`process controller: ${f}...`);
-
-    let mapping = require(__dirname + '/controllers/' + f);
+function addMapping(router, mapping) {
     for (var url in mapping) {
         if (url.startsWith('GET ')) {
             var path = url.substring(4);
@@ -39,6 +30,21 @@ for (var f of js_files) {
         }
     }
 }
+
+function addControllers(router) {
+    var files = fs.readdirSync(__dirname + '/controllers');
+    var js_files = files.filter((f) => {
+        return f.endsWith('.js');
+    }, files);
+
+    for (var f of js_files) {
+        console.log(`process controller: ${f}...`);
+        let mapping = require(__dirname + '/controllers/' + f);
+        addMapping(router, mapping);
+    }
+}
+
+addControllers(router);
 
 app.use(router.routes());
 
