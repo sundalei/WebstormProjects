@@ -53,6 +53,7 @@ Pet.create({
 /**
  * async/await style
  */
+/* 
 (async () => {
     var dog = await Pet.create({
         id: 'd-' + now,
@@ -63,7 +64,47 @@ Pet.create({
         updatedAt: now,
         version: 0
     });
-    console.log('hello world');
-    console.log(dog);
     console.log('created: ' + JSON.stringify(dog));
 })();
+*/
+
+/**
+ * findAll
+ */
+/*
+(async () => {
+    var pets = await Pet.findAll({
+        where: {
+            name: 'Gaffey'
+        }
+    });
+    console.log(`find ${pets.length} pets`);
+    for (let p of pets) {
+        console.log(JSON.stringify(p));
+    }
+})();
+*/
+
+(async () => {
+    var p = await Pet.findOne({
+        where: {
+            name: 'Odie'
+        }
+    });
+    p.gender = true;
+    p.updatedAt = Date.now();
+    p.version += 2;
+    await p.save();
+})();
+
+/*
+(async () => {
+    var p = await Pet.findOne({
+        where: {
+            name: 'Gaffey'
+        }
+    });
+    
+    await p.destroy();
+})();
+*/
