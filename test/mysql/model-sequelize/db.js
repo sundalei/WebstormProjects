@@ -2,9 +2,15 @@
 
 const Sequelize = require('sequelize');
 
+const uuid = require('node-uuid');
+
 const config = require('./config');
 
 console.log('init sequelize...');
+
+function generateId() {
+    return uuid.v4();
+}
 
 var sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
@@ -52,6 +58,16 @@ function defineModel(name, attributes) {
         type: Sequelize.BIGINT,
         allowNull: false
     };
+
+    console.log('model defined for table: ' + name + '\n' + JSON.stringify(attrs, function (k, v) {
+        if (k === 'type') {
+            for (let key in Sequelize) {
+                console.log(key);
+            }
+        }
+        console.log('-------------------------------');
+        return v;
+    }, '  '));
     
     return sequelize.define(name, attrs, {
         tableName: name,

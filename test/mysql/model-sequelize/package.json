@@ -6,6 +6,7 @@
         "babel-polyfill": "latest",
         "babel-preset-stage-3": "latest",
         "sequelize": "latest",
-        "mysql": "latest"
+        "mysql": "latest",
+        "node-uuid": "latest"
     }
 }
