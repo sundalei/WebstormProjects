@@ -105,7 +105,7 @@ function defineModel(name, attributes) {
                     obj.version = 0;
                 } else {
                     console.log('will update entity...');
-                    obj.updatedAt = Date.now();
+                    obj.updatedAt = now;
                     obj.version++;
                 }
             }
@@ -119,7 +119,7 @@ var exp = {
     defineModel: defineModel,
     sync: () => {
         if (process.env.NODE_ENV !== 'production') {
-            sequelize.sync({ force: true });
+            return sequelize.sync({ force: true });
         } else {
             throw new Error('Cannot sync() when NODE_ENV is set to \'production\'.');
         }
