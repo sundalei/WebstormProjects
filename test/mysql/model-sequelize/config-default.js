@@ -3,7 +3,7 @@
 var config = {
     dialect: 'mysql',
     database: 'nodejs',
-    username: 'hello',
+    username: 'sundalei',
     password: 'root',
     host: 'localhost',
     port: 3306

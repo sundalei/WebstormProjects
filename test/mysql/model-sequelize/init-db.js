@@ -7,9 +7,6 @@ register({
 });
 
 const model = require('./model.js');
-model.sync().catch(function (err) {
-    console.log(err);
-});
+model.sync();
 
 console.log('init db ok.');
-process.exit(0);

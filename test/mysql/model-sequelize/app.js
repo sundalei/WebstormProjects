@@ -15,6 +15,13 @@ let
         passwd: 'hahaha'
     });
     // console.log('created: ' + JSON.stringify(user));
+    var sundalei = await User.create({
+        name: 'Sundalei',
+        gender: false,
+        email: 'sundalei1988@gmail.com',
+        passwd: 'hahaha'
+    });
+    // console.log('created: ' + JSON.stringify(sundalei));
     var cat = await Pet.create({
         ownerId: user.id,
         name: 'Garfield',
