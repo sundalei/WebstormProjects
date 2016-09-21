@@ -81,13 +81,16 @@ let server = app.listen(3000);
 
 function parseUser(obj) {
     if (!obj) {
+        console.log(`parseUser obj null`);
         return;
     }
     console.log('try parse: ' + obj);
     let s = '';
     if (typeof obj === 'string') {
+        console.log(`parseUser string ${obj}`);
         s = obj;
     } else if (obj.headers) {
+        console.log(`parseUser obj.headers`)
         let cookies = new Cookies(obj, null);
         s = cookies.get('name');
     }
@@ -107,7 +110,7 @@ function createWebSocketServer(server, onConnection, onMessage, onClose, onError
         server: server
     });
 
-    wss.broadcast = function broadcast(data) {
+    wss.broadcast = function broadcast (data) {
         wss.clients.forEach(function each(client) {
             client.send(data);
         });
@@ -164,7 +167,7 @@ function createMessage(type, user, data) {
     });
 }
 
-function onConnect() {
+function onConnection() {
     let user = this.user;
     let msg = createMessage('join', user, `${user.name} joined.`);
     this.wss.broadcast(msg);
@@ -189,6 +192,6 @@ function onClose() {
     this.wss.broadcast(msg);
 }
 
-app.wss = createWebSocketServer(server, onConnect, onMessage, onClose);
+app.wss = createWebSocketServer(server, onConnection, onMessage, onClose);
 
 console.log('app started at port 3000...');
