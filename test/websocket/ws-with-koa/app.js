@@ -20,8 +20,6 @@ const WebSocketServer = ws.Server;
 
 const app = new Koa();
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 // log request URL:
 app.use(async (ctx, next) => {
     console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
@@ -108,23 +106,29 @@ function createWebSocketServer(server, onConnection, onMessage, onClose, onError
     let wss = new WebSocketServer({
         server: server
     });
+
     wss.broadcast = function broadcast(data) {
         wss.clients.forEach(function each(client) {
             client.send(data);
         });
     };
+
     onConnection = onConnection || function () {
         console.log('[WebSocket] connected.');
     };
+
     onMessage = onMessage || function (msg) {
         console.log('[WebSocket] message received: ' + msg);
     };
+
     onClose = onClose || function (code, message) {
         console.log(`[WebSocket] closed: ${code} - ${message}`);
     };
+
     onError = onError || function (err) {
         console.log('[WebSocket] error: ' + err);
     };
+    
     wss.on('connection', function (ws) {
         let location = url.parse(ws.upgradeReq.url, true);
         console.log('[WebSocketServer] connection: ' + location.href);

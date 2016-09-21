@@ -2,9 +2,9 @@
 
 <script>
 
-function addToUserList(list, user) {
+function addToUserList (list, user) {
     var i;
-    for (i=0; i<list.length; i++) {
+    for (i = 0; i < list.length; i++) {
         if (list[i].id === user.id) {
             return;
         }
@@ -12,9 +12,9 @@ function addToUserList(list, user) {
     list.push(user);
 }
 
-function removeFromUserList(list, user) {
+function removeFromUserList (list, user) {
     var i, target = -1;
-    for (i=0; i<list.length; i++) {
+    for (i = 0; i < list.length; i++) {
         if (list[i].id === user.id) {
             target = i;
             break;
@@ -25,7 +25,7 @@ function removeFromUserList(list, user) {
     }
 }
 
-function addMessage(list, msg) {
+function addMessage (list, msg) {
     list.push(msg);
     $('#message-list').parent().animate({
         scrollTop: $('#message-list').height()
