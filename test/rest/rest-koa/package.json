@@ -1,0 +1,15 @@
+{
+    "name": "rest-hello",
+    "version": "1.0.0",
+    "dependencies": {
+        "babel-register": "latest",
+        "babel-polyfill": "latest",
+        "babel-preset-stage-3": "latest",
+        "koa": "2.0.0",
+        "koa-bodyparser": "3.2.0",
+        "koa-router": "7.0.1",
+        "nunjucks": "latest",
+        "mime": "latest",
+        "mz": "latest"
+    }
+}
