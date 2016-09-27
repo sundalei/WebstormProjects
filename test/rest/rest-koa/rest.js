@@ -7,6 +7,7 @@ module.exports = {
     },
 
     restify: (pathPrefix) => {
+        // REST API前缀, 默认为/api/
         pathPrefix = pathPrefix || '/api/';
         return async (ctx, next) => {
             if (ctx.request.path.startsWith(pathPrefix)) {
