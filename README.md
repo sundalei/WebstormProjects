@@ -6,3 +6,4 @@
 - Launch a new project
 - Write a script
 - Test scripts
+- Integration scripts
