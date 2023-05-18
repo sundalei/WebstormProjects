@@ -6,5 +6,5 @@
 - Launch a new project
 - Write a script
 - Test scripts
-- Integration scripts
+- Integration scripts test
 - hello world welcome
